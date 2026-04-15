@@ -1,0 +1,309 @@
+/* ============================================================
+   aggrid-control.css
+   AgGridControl 커스텀 컨트롤 스타일시트
+   ============================================================ */
+
+/* ----------------------------------------------------------------
+   CSS 변수 (테마 변경 가능)
+   ---------------------------------------------------------------- */
+:root {
+    --agctrl-toolbar-bg        : #f8f9fa;
+    --agctrl-toolbar-border    : #dee2e6;
+    --agctrl-toolbar-height    : 44px;
+    --agctrl-toolbar-gap       : 6px;
+    --agctrl-toolbar-padding   : 0 10px;
+
+    --agctrl-btn-height        : 30px;
+    --agctrl-btn-padding       : 0 12px;
+    --agctrl-btn-font-size     : 13px;
+    --agctrl-btn-radius        : 4px;
+    --agctrl-btn-gap           : 4px;
+
+    /* 신규 버튼 */
+    --agctrl-btn-new-bg        : #0d6efd;
+    --agctrl-btn-new-hover     : #0b5ed7;
+    --agctrl-btn-new-color     : #fff;
+
+    /* 저장 버튼 */
+    --agctrl-btn-save-bg       : #198754;
+    --agctrl-btn-save-hover    : #157347;
+    --agctrl-btn-save-color    : #fff;
+
+    /* 삭제 버튼 */
+    --agctrl-btn-delete-bg     : #dc3545;
+    --agctrl-btn-delete-hover  : #bb2d3b;
+    --agctrl-btn-delete-color  : #fff;
+
+    /* 엑셀 버튼 */
+    --agctrl-btn-excel-bg      : #217346;
+    --agctrl-btn-excel-hover   : #155c38;
+    --agctrl-btn-excel-color   : #fff;
+
+    /* 커스텀 버튼 기본 */
+    --agctrl-btn-custom-bg     : #6c757d;
+    --agctrl-btn-custom-hover  : #5a6268;
+    --agctrl-btn-custom-color  : #fff;
+
+    /* 검색창 */
+    --agctrl-search-width      : 260px;
+    --agctrl-search-height     : 30px;
+    --agctrl-search-border     : #ced4da;
+    --agctrl-search-focus      : #86b7fe;
+    --agctrl-search-bg         : #fff;
+}
+
+/* ----------------------------------------------------------------
+   래퍼
+   ---------------------------------------------------------------- */
+.aggrid-wrapper {
+    display        : flex;
+    flex-direction : column;
+    width          : 100%;
+    border         : 1px solid var(--agctrl-toolbar-border);
+    border-radius  : 4px;
+    overflow       : hidden;
+}
+
+/* ----------------------------------------------------------------
+   툴바
+   ---------------------------------------------------------------- */
+.aggrid-toolbar {
+    display         : flex;
+    align-items     : center;
+    justify-content : space-between;
+    min-height      : var(--agctrl-toolbar-height);
+    padding         : var(--agctrl-toolbar-padding);
+    background-color: var(--agctrl-toolbar-bg);
+    border-bottom   : 1px solid var(--agctrl-toolbar-border);
+    gap             : var(--agctrl-toolbar-gap);
+    flex-wrap       : wrap;
+    row-gap         : 6px;
+}
+
+.aggrid-toolbar-left {
+    display    : flex;
+    align-items: center;
+    gap        : var(--agctrl-btn-gap);
+    flex-wrap  : wrap;
+}
+
+.aggrid-toolbar-right {
+    display    : flex;
+    align-items: center;
+    gap        : var(--agctrl-toolbar-gap);
+}
+
+/* ----------------------------------------------------------------
+   공통 버튼 스타일
+   ---------------------------------------------------------------- */
+.btn-toolbar {
+    display        : inline-flex;
+    align-items    : center;
+    gap            : 5px;
+    height         : var(--agctrl-btn-height);
+    padding        : var(--agctrl-btn-padding);
+    font-size      : var(--agctrl-btn-font-size);
+    font-weight    : 500;
+    line-height    : 1;
+    border         : none;
+    border-radius  : var(--agctrl-btn-radius);
+    cursor         : pointer;
+    white-space    : nowrap;
+    transition     : background-color 0.15s ease, box-shadow 0.15s ease;
+    user-select    : none;
+    outline        : none;
+}
+
+.btn-toolbar:focus-visible {
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+}
+
+.btn-toolbar:active {
+    transform: translateY(1px);
+}
+
+.btn-toolbar .btn-icon {
+    display     : inline-flex;
+    align-items : center;
+    flex-shrink : 0;
+}
+
+/* ----------------------------------------------------------------
+   개별 버튼 색상
+   ---------------------------------------------------------------- */
+.btn-new {
+    background-color: var(--agctrl-btn-new-bg);
+    color           : var(--agctrl-btn-new-color);
+}
+.btn-new:hover {
+    background-color: var(--agctrl-btn-new-hover);
+}
+
+.btn-save {
+    background-color: var(--agctrl-btn-save-bg);
+    color           : var(--agctrl-btn-save-color);
+}
+.btn-save:hover {
+    background-color: var(--agctrl-btn-save-hover);
+}
+
+.btn-delete {
+    background-color: var(--agctrl-btn-delete-bg);
+    color           : var(--agctrl-btn-delete-color);
+}
+.btn-delete:hover {
+    background-color: var(--agctrl-btn-delete-hover);
+}
+
+.btn-excel {
+    background-color: var(--agctrl-btn-excel-bg);
+    color           : var(--agctrl-btn-excel-color);
+}
+.btn-excel:hover {
+    background-color: var(--agctrl-btn-excel-hover);
+}
+
+.btn-custom {
+    background-color: var(--agctrl-btn-custom-bg);
+    color           : var(--agctrl-btn-custom-color);
+}
+.btn-custom:hover {
+    background-color: var(--agctrl-btn-custom-hover);
+}
+
+/* ----------------------------------------------------------------
+   검색창
+   ---------------------------------------------------------------- */
+.aggrid-search-box {
+    display        : flex;
+    align-items    : center;
+    position       : relative;
+    width          : var(--agctrl-search-width);
+}
+
+.aggrid-search-box .search-icon {
+    position     : absolute;
+    left         : 8px;
+    color        : #6c757d;
+    pointer-events: none;
+    flex-shrink  : 0;
+}
+
+.aggrid-search-box .search-input {
+    width          : 100%;
+    height         : var(--agctrl-search-height);
+    padding        : 0 28px 0 28px;
+    font-size      : 13px;
+    border         : 1px solid var(--agctrl-search-border);
+    border-radius  : var(--agctrl-btn-radius);
+    background-color: var(--agctrl-search-bg);
+    outline        : none;
+    transition     : border-color 0.15s ease, box-shadow 0.15s ease;
+    box-sizing     : border-box;
+}
+
+.aggrid-search-box .search-input:focus {
+    border-color: var(--agctrl-search-focus);
+    box-shadow  : 0 0 0 3px rgba(13, 110, 253, 0.15);
+}
+
+.aggrid-search-box .search-input::placeholder {
+    color      : #adb5bd;
+    font-size  : 12px;
+}
+
+.aggrid-search-box .search-clear {
+    position        : absolute;
+    right           : 6px;
+    width           : 18px;
+    height          : 18px;
+    display         : flex;
+    align-items     : center;
+    justify-content : center;
+    font-size       : 14px;
+    line-height     : 1;
+    color           : #6c757d;
+    background      : none;
+    border          : none;
+    border-radius   : 50%;
+    cursor          : pointer;
+    padding         : 0;
+    transition      : background-color 0.15s;
+}
+
+.aggrid-search-box .search-clear:hover {
+    background-color: #e9ecef;
+    color           : #343a40;
+}
+
+/* ----------------------------------------------------------------
+   그리드 컨테이너
+   ---------------------------------------------------------------- */
+.aggrid-grid-container {
+    width   : 100%;
+    overflow: hidden;
+}
+
+/* ----------------------------------------------------------------
+   ag-Grid 테마 커스터마이징 (Alpine 기준)
+   ---------------------------------------------------------------- */
+.aggrid-grid-container.ag-theme-alpine {
+    --ag-font-size          : 13px;
+    --ag-font-family        : -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --ag-header-height      : 36px;
+    --ag-row-height         : 32px;
+    --ag-cell-horizontal-padding: 10px;
+    --ag-header-background-color: #f1f3f5;
+    --ag-header-foreground-color: #343a40;
+    --ag-border-color       : #dee2e6;
+    --ag-row-hover-color    : #e8f4fd;
+    --ag-selected-row-background-color: #cfe2ff;
+}
+
+/* 헤더 폰트 굵기 */
+.aggrid-grid-container.ag-theme-alpine .ag-header-cell-label {
+    font-weight: 600;
+}
+
+/* 짝수 행 배경 (얼룩말 줄무늬) */
+.aggrid-grid-container.ag-theme-alpine .ag-row-even {
+    background-color: #fafbfc;
+}
+
+/* 편집 가능 셀 표시 */
+.aggrid-grid-container.ag-theme-alpine .ag-cell.ag-cell-inline-editing {
+    border: 1px solid #0d6efd !important;
+    padding-top: 0;
+}
+
+/* 페이지네이션 스타일 */
+.aggrid-grid-container.ag-theme-alpine .ag-paging-panel {
+    border-top   : 1px solid #dee2e6;
+    background   : #f8f9fa;
+    font-size    : 12px;
+    color        : #6c757d;
+}
+
+/* ----------------------------------------------------------------
+   반응형 (소형 화면)
+   ---------------------------------------------------------------- */
+@media (max-width: 768px) {
+    .aggrid-toolbar {
+        flex-direction: column;
+        align-items   : flex-start;
+        height        : auto;
+        padding       : 8px 10px;
+    }
+
+    .aggrid-toolbar-right {
+        width: 100%;
+    }
+
+    .aggrid-search-box {
+        width: 100%;
+    }
+
+    :root {
+        --agctrl-search-width: 100%;
+    }
+}
