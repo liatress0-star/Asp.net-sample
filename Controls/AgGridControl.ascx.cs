@@ -91,24 +91,24 @@ namespace WebApp.Controls
         public string ExcelFileName { get; set; } = "export";
 
         // -------------------------------------------------------------------
-        // JS 콜백 (전역 함수명을 문자열로 지정)
+        // JS 콜백 (전역 함수명을 문자열로 지정, On* 접두사는 WebForms 이벤트와 충돌하므로 Js* 사용)
         // -------------------------------------------------------------------
         /// <summary>신규 버튼 클릭 시 호출할 전역 JS 함수명</summary>
-        public string OnNewClick { get; set; }
+        public string JsNewClick { get; set; }
         /// <summary>저장 버튼 클릭 시 호출할 전역 JS 함수명</summary>
-        public string OnSaveClick { get; set; }
+        public string JsSaveClick { get; set; }
         /// <summary>삭제 버튼 클릭 시 호출할 전역 JS 함수명</summary>
-        public string OnDeleteClick { get; set; }
+        public string JsDeleteClick { get; set; }
         /// <summary>엑셀 버튼 클릭 시 호출할 전역 JS 함수명 (미지정 시 내부 엑셀 내보내기 실행)</summary>
-        public string OnExcelClick { get; set; }
+        public string JsExcelClick { get; set; }
         /// <summary>행 클릭 시 호출할 전역 JS 함수명</summary>
-        public string OnRowClick { get; set; }
+        public string JsRowClick { get; set; }
         /// <summary>행 선택 변경 시 호출할 전역 JS 함수명</summary>
-        public string OnRowSelected { get; set; }
+        public string JsRowSelected { get; set; }
         /// <summary>셀 값 변경 시 호출할 전역 JS 함수명</summary>
-        public string OnCellValueChanged { get; set; }
+        public string JsCellValueChanged { get; set; }
         /// <summary>그리드 준비 완료 시 호출할 전역 JS 함수명</summary>
-        public string OnGridReady { get; set; }
+        public string JsGridReady { get; set; }
 
         // -------------------------------------------------------------------
         // 그리드 옵션
@@ -317,14 +317,14 @@ namespace WebApp.Controls
             };
 
             // JS 콜백 함수명 (비어있으면 추가하지 않음)
-            if (!string.IsNullOrWhiteSpace(OnNewClick))          cfg["onNewClick"]          = OnNewClick;
-            if (!string.IsNullOrWhiteSpace(OnSaveClick))         cfg["onSaveClick"]         = OnSaveClick;
-            if (!string.IsNullOrWhiteSpace(OnDeleteClick))       cfg["onDeleteClick"]       = OnDeleteClick;
-            if (!string.IsNullOrWhiteSpace(OnExcelClick))        cfg["onExcelClick"]        = OnExcelClick;
-            if (!string.IsNullOrWhiteSpace(OnRowClick))          cfg["onRowClick"]          = OnRowClick;
-            if (!string.IsNullOrWhiteSpace(OnRowSelected))       cfg["onRowSelected"]       = OnRowSelected;
-            if (!string.IsNullOrWhiteSpace(OnCellValueChanged))  cfg["onCellValueChanged"]  = OnCellValueChanged;
-            if (!string.IsNullOrWhiteSpace(OnGridReady))         cfg["onGridReady"]         = OnGridReady;
+            if (!string.IsNullOrWhiteSpace(JsNewClick))         cfg["onNewClick"]         = JsNewClick;
+            if (!string.IsNullOrWhiteSpace(JsSaveClick))        cfg["onSaveClick"]        = JsSaveClick;
+            if (!string.IsNullOrWhiteSpace(JsDeleteClick))      cfg["onDeleteClick"]      = JsDeleteClick;
+            if (!string.IsNullOrWhiteSpace(JsExcelClick))       cfg["onExcelClick"]       = JsExcelClick;
+            if (!string.IsNullOrWhiteSpace(JsRowClick))         cfg["onRowClick"]         = JsRowClick;
+            if (!string.IsNullOrWhiteSpace(JsRowSelected))      cfg["onRowSelected"]      = JsRowSelected;
+            if (!string.IsNullOrWhiteSpace(JsCellValueChanged)) cfg["onCellValueChanged"] = JsCellValueChanged;
+            if (!string.IsNullOrWhiteSpace(JsGridReady))        cfg["onGridReady"]        = JsGridReady;
 
             var serializer = new JavaScriptSerializer { MaxJsonLength = int.MaxValue };
             return serializer.Serialize(cfg);

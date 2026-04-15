@@ -132,13 +132,13 @@
                 RowSelection="multiple"
                 EnablePagination="false"
                 ExcelFileName="employee_list"
-                OnNewClick="handleEmployeeNew"
-                OnSaveClick="handleEmployeeSave"
-                OnDeleteClick="handleEmployeeDelete"
-                OnRowClick="handleEmployeeRowClick"
-                OnRowSelected="handleEmployeeRowSelected"
-                OnCellValueChanged="handleEmployeeCellChanged"
-                OnGridReady="handleEmployeeGridReady" />
+                JsNewClick="handleEmployeeNew"
+                JsSaveClick="handleEmployeeSave"
+                JsDeleteClick="handleEmployeeDelete"
+                JsRowClick="handleEmployeeRowClick"
+                JsRowSelected="handleEmployeeRowSelected"
+                JsCellValueChanged="handleEmployeeCellChanged"
+                JsGridReady="handleEmployeeGridReady" />
 
             <%-- 선택 정보 패널 --%>
             <div class="status-panel">
@@ -184,9 +184,9 @@
                 NewButtonText="제품 추가"
                 ExcelFileName="product_list"
                 RowSelection="single"
-                OnNewClick="handleProductNew"
-                OnRowClick="handleProductRowClick"
-                OnGridReady="handleProductGridReady" />
+                JsNewClick="handleProductNew"
+                JsRowClick="handleProductRowClick"
+                JsGridReady="handleProductGridReady" />
 
             <div class="status-panel">
                 <div class="status-item">
