@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Web.Script.Serialization;
 using System.Web.UI;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace WebApp.Controls
 {
@@ -265,10 +265,10 @@ namespace WebApp.Controls
                 colList.Add(d);
             }
 
-            var json = JsonConvert.SerializeObject(colList, Formatting.None);
+            var serializer = new JavaScriptSerializer { MaxJsonLength = int.MaxValue };
+            var json = serializer.Serialize(colList);
             // "__fn__" 마킹된 값은 따옴표 없이 JS 함수 참조로 변환
-            json = System.Text.RegularExpressions.Regex.Replace(
-                json, "\"__fn__([^\"]+)\"", "$1");
+            json = Regex.Replace(json, "\"__fn__([^\"]+)\"", "$1");
             return json;
         }
 
@@ -298,34 +298,36 @@ namespace WebApp.Controls
                     d[col.ColumnName] = row[col] == DBNull.Value ? null : row[col];
                 rows.Add(d);
             }
-            return JsonConvert.SerializeObject(rows, Formatting.None);
+            var serializer = new JavaScriptSerializer { MaxJsonLength = int.MaxValue };
+            return serializer.Serialize(rows);
         }
 
         private string BuildConfigJson()
         {
             var cfg = new Dictionary<string, object>
             {
-                ["gridInstanceId"] = GridInstanceId,
-                ["rowSelection"] = RowSelection,
-                ["enablePagination"] = EnablePagination,
-                ["pageSize"] = PageSize,
-                ["animateRows"] = AnimateRows,
-                ["enableRangeSelection"] = EnableRangeSelection,
-                ["suppressRowClickSelection"] = SuppressRowClickSelection,
-                ["excelFileName"] = ExcelFileName,
+                { "gridInstanceId",          GridInstanceId },
+                { "rowSelection",            RowSelection },
+                { "enablePagination",        EnablePagination },
+                { "pageSize",                PageSize },
+                { "animateRows",             AnimateRows },
+                { "enableRangeSelection",    EnableRangeSelection },
+                { "suppressRowClickSelection", SuppressRowClickSelection },
+                { "excelFileName",           ExcelFileName },
             };
 
-            // JS 콜백 함수명 (비어있으면 null)
-            if (!string.IsNullOrWhiteSpace(OnNewClick)) cfg["onNewClick"] = OnNewClick;
-            if (!string.IsNullOrWhiteSpace(OnSaveClick)) cfg["onSaveClick"] = OnSaveClick;
-            if (!string.IsNullOrWhiteSpace(OnDeleteClick)) cfg["onDeleteClick"] = OnDeleteClick;
-            if (!string.IsNullOrWhiteSpace(OnExcelClick)) cfg["onExcelClick"] = OnExcelClick;
-            if (!string.IsNullOrWhiteSpace(OnRowClick)) cfg["onRowClick"] = OnRowClick;
-            if (!string.IsNullOrWhiteSpace(OnRowSelected)) cfg["onRowSelected"] = OnRowSelected;
-            if (!string.IsNullOrWhiteSpace(OnCellValueChanged)) cfg["onCellValueChanged"] = OnCellValueChanged;
-            if (!string.IsNullOrWhiteSpace(OnGridReady)) cfg["onGridReady"] = OnGridReady;
+            // JS 콜백 함수명 (비어있으면 추가하지 않음)
+            if (!string.IsNullOrWhiteSpace(OnNewClick))          cfg["onNewClick"]          = OnNewClick;
+            if (!string.IsNullOrWhiteSpace(OnSaveClick))         cfg["onSaveClick"]         = OnSaveClick;
+            if (!string.IsNullOrWhiteSpace(OnDeleteClick))       cfg["onDeleteClick"]       = OnDeleteClick;
+            if (!string.IsNullOrWhiteSpace(OnExcelClick))        cfg["onExcelClick"]        = OnExcelClick;
+            if (!string.IsNullOrWhiteSpace(OnRowClick))          cfg["onRowClick"]          = OnRowClick;
+            if (!string.IsNullOrWhiteSpace(OnRowSelected))       cfg["onRowSelected"]       = OnRowSelected;
+            if (!string.IsNullOrWhiteSpace(OnCellValueChanged))  cfg["onCellValueChanged"]  = OnCellValueChanged;
+            if (!string.IsNullOrWhiteSpace(OnGridReady))         cfg["onGridReady"]         = OnGridReady;
 
-            return JsonConvert.SerializeObject(cfg, Formatting.None);
+            var serializer = new JavaScriptSerializer { MaxJsonLength = int.MaxValue };
+            return serializer.Serialize(cfg);
         }
     }
 }

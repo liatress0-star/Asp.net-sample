@@ -1,5 +1,4 @@
 <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="GridSample.aspx.cs" Inherits="WebApp.GridSample" %>
-<%@ Register TagPrefix="ctrl" TagName="AgGridControl" Src="~/Controls/AgGridControl.ascx" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
